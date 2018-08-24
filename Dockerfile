@@ -6,6 +6,7 @@ RUN apt-get install -y git
 RUN apt-get install -y cmake
 RUN apt-get install -y clang
 RUN apt-get install -y vim
+RUN apt-get install -y pax-utils
 
 ADD external/radcli/radcli-1.2.10.tar.gz /radcli_lib
 
