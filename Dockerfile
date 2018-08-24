@@ -7,9 +7,9 @@ RUN apt-get install -y cmake
 RUN apt-get install -y clang
 RUN apt-get install -y vim
 
-ADD external/radcli/radcli-1.2.10.tar.gz /radcli_lib_01
+ADD external/radcli/radcli-1.2.10.tar.gz /radcli_lib
 
-WORKDIR /radcli_lib_01/radcli-1.2.10
+WORKDIR /radcli_lib/radcli-1.2.10
 
 RUN ["/bin/bash", "./configure"]
 RUN make VERBOSE=1
