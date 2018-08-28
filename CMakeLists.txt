@@ -2,6 +2,8 @@ cmake_minimum_required (VERSION 3.10)
 
 project (agrc_project)
 
+message("Building access-gateway-radius-client-lib")
+
 #message("before: CMAKE_LIBRARY_PATH: ${CMAKE_LIBRARY_PATH}")
 #set(CMAKE_LIBRARY_PATH "/usr/local/lib")
 #message("after: CMAKE_LIBRARY_PATH: ${CMAKE_LIBRARY_PATH}")
@@ -50,4 +52,27 @@ add_subdirectory(app)
 #install (TARGETS app/access-gateway-radius-client-lib  
 #	 DESTINATION lib)
 
+# Copy the default config file
+install (FILES ${CMAKE_CURRENT_LIST_DIR}/config/default/radiusclient.conf
+	 DESTINATION /etc/agrc/ 
+	 PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_WRITE WORLD_EXECUTE WORLD_READ  
+	 )
+
+# Copy the default dictionary file
+install (FILES ${CMAKE_CURRENT_LIST_DIR}/config/default/dictionary
+	 DESTINATION /etc/agrc/ 
+	 PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_WRITE WORLD_EXECUTE WORLD_READ  
+	 )
+
+# Copy the default nomadix dictionary file
+install (FILES ${CMAKE_CURRENT_LIST_DIR}/config/default/dictionary.nomadix
+	 DESTINATION /etc/agrc/ 
+	 PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_WRITE WORLD_EXECUTE WORLD_READ  
+	 )
+
+# Copy the default servers file
+install (FILES ${CMAKE_CURRENT_LIST_DIR}/config/default/servers
+	 DESTINATION /etc/agrc/ 
+	 PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_WRITE WORLD_EXECUTE WORLD_READ  
+	 )
 

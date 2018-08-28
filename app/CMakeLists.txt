@@ -32,9 +32,13 @@ set(CMAKE_LIBRARY_PATH "/usr/local/lib" ${CMAKE_LIBRARY_PATH})
 message("After: CMAKE_LIBRARY_PATH: ${CMAKE_LIBRARY_PATH}")
 #set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} "/user/home2")
 
+message("Before: CMAKE_LIBRARY_PATH: ${CMAKE_LIBRARY_PATH}")
+
 unset(RADCLI_SEARCH_RESULT)
 find_library(RADCLI_SEARCH_RESULT radcli REQUIRED)
 message("RADCLI_SEARCH_RESULT: ${RADCLI_SEARCH_RESULT}")
+
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
 
 # Create access-gateway-radius-client-lib by linking to radcli
 target_link_libraries(access-gateway-radius-client-lib PUBLIC radcli)
@@ -43,12 +47,13 @@ target_link_libraries(access-gateway-radius-client-lib PUBLIC radcli)
 add_executable (agrcbin src/main.cpp)
 target_link_libraries(agrcbin access-gateway-radius-client-lib)
 
-install (FILES ${CMAKE_CURRENT_LIST_DIR}/include/AccessGatewayRadiusClient.h
-	 DESTINATION include  
-	 PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_WRITE WORLD_EXECUTE WORLD_READ  
-	 )
-
 install (TARGETS access-gateway-radius-client-lib  
 	 DESTINATION lib
 	 PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_WRITE WORLD_EXECUTE WORLD_READ  
 	 )
+
+install (FILES ${CMAKE_CURRENT_LIST_DIR}/include/AccessGatewayRadiusClient.h
+	 DESTINATION include
+	 PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_WRITE WORLD_EXECUTE WORLD_READ  
+	 )
+
