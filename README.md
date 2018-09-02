@@ -47,7 +47,7 @@ This library can be created in the following two different ways
 
 2. Pre-requisites are handled in Dockerfile. 
    - Execute `srcDir/build.sh` file - To create Docker image
-   - Execute `srcDir/run.sh` to start a container using the Docker image
+   - Execute `srcDir/run.sh` - To start a container using the Docker image
 
 3. You will be in /ag-radius directroy
    - Create a directory `build` and go to `build' directory
