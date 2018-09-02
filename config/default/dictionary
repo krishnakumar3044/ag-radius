@@ -303,6 +303,11 @@ VALUE		Add-Port-To-IP-Address	Yes			1
 #VALUE		Server-Config		Password-Expiration	30
 #VALUE		Server-Config		Password-Warning	5
 
-#$INCLUDE /etc/radcli/dictionary.microsoft
-#$INCLUDE /etc/radcli/dictionary.roaringpenguin
+
+#Include Nomadix dictionary
+$INCLUDE /etc/agrc/dictionary.nomadix
+
+#Include Wba(Wireless Broadband Alliance Ltd) dictionary
+$INCLUDE /etc/agrc/dictionary.wba
+
 

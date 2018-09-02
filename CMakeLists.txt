@@ -70,6 +70,12 @@ install (FILES ${CMAKE_CURRENT_LIST_DIR}/config/default/dictionary.nomadix
 	 PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_WRITE WORLD_EXECUTE WORLD_READ  
 	 )
 
+# Copy the default Wba dictionary file
+install (FILES ${CMAKE_CURRENT_LIST_DIR}/config/default/dictionary.wba
+	 DESTINATION /etc/agrc/ 
+	 PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_WRITE WORLD_EXECUTE WORLD_READ  
+	 )
+
 # Copy the default servers file
 install (FILES ${CMAKE_CURRENT_LIST_DIR}/config/default/servers
 	 DESTINATION /etc/agrc/ 
