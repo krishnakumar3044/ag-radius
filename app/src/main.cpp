@@ -144,7 +144,8 @@ sendAcctRequest()
 
 int main(int argc, char** argv)
 {
- 
+    rc_openlog("AGRC");
+
     // Send auth request
     sendAuthRequest();
 
