@@ -1,0 +1,11 @@
+# -*- text -*-
+#
+# Version:	$Id: dictionary.wba
+#
+VENDOR		Wba				14122
+#
+BEGIN-VENDOR	Wba
+
+ATTRIBUTE   Wba-wispr-location-id           1     string
+
+END-VENDOR	Wba
