@@ -54,5 +54,13 @@ This library can be created in the following two different ways
    - `cmake ..`
    - `make` 
    - `make install` (make sure to run as `root`). This will create the following files
+     - `/etc/agrc/radiusclient.conf`
+     - `/etc/agrc/dictionary`
+     - `/etc/agrc/dictionary.nomadix`
+     - `/etc/agrc/dictionary.wba
+     - `/etc/agrc/servers`
+     - `/usr/local/lib/libaccess-gateway-radius-client-lib.so`
+     - `/usr/local/include/AccessGatewayRadiusClient.h`
+   
    - Run the sample program from `build` directory (app/agrcbin) - to ensure that everything is installed properly    
 
