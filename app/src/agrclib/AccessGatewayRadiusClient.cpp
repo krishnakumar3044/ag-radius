@@ -71,10 +71,12 @@ AccessGatewayRadiusClient::sendAuthRequest(AgrcRequestType reqType,
 
     for (it = (*sendAttributeList).begin(); it != (*sendAttributeList).end(); ++it)
     {
+/*        
         cout << "Attribute id: " << it->attributeId << "\n";      
         cout << "Attribute type: " << it->attributeType << "\n";                     
         cout << "Attribute int value: " << it->attributeIntValue << "\n";                
         cout << "Attribute String value: " << it->attributeStringValue << "\n";        
+*/        
 
         switch (it->attributeType)
         {
@@ -90,14 +92,18 @@ AccessGatewayRadiusClient::sendAuthRequest(AgrcRequestType reqType,
             case PW_TYPE_STRING:
                 if (rc_avpair_add(rh, &sendAttributes, it->attributeId, 
                                 it->attributeStringValue.c_str(), -1, 0) == NULL) {
-                    printf ("%d: code here\n", __LINE__);
                     requestStatus = AGRC_FAIL;
                     return (requestStatus);  
                 }
                 break;
 
             case PW_TYPE_IPADDR:
-
+            case PW_TYPE_DATE:
+                if (rc_avpair_add(rh, &sendAttributes, it->attributeId, 
+                                it->attributeStringValue.c_str(), -1, 0) == NULL) {
+                    requestStatus = AGRC_FAIL;
+                    return (requestStatus);  
+                }
                 break;
 
             default:
@@ -111,7 +117,7 @@ AccessGatewayRadiusClient::sendAuthRequest(AgrcRequestType reqType,
     if (result == OK_RC) {
         VALUE_PAIR *vp = NULL;
         if (reqType == AGRC_AUTH_REQUEST) {
-            VALUE_PAIR *vp = receiveAttributes;
+            vp = receiveAttributes;
         } 
 
         char name[128];
@@ -123,8 +129,31 @@ AccessGatewayRadiusClient::sendAuthRequest(AgrcRequestType reqType,
         /* print the known attributes in the reply */
         while (vp != NULL) {
             if (rc_avpair_tostr(rh, vp, name, sizeof(name), value, sizeof(value)) == 0) {
-                fprintf(stderr, "%s:\t%s\n", name, value);
-                printf("%s:\t%s\n", name, value);                
+                //fprintf(stderr, "%s:\t%s\n", name, value);
+                //printf("%s:\t%s\n", name, value); 
+                printf("%s:\t%s\n", name, value); 
+
+                memset(&receiveAttribute, 0, sizeof(struct AccessGatewayRadiusClient::AgrcAttribute_));
+                receiveAttribute.attributeId = vp->attribute;
+                receiveAttribute.attributeType = vp->type;
+
+                // Received Attribute is Vendor specific attribute
+                if (receiveAttribute.attributeId > 0xffff) {
+                    // VSA(Vendor specific attribute)
+                    uint32_t localAttributeId = receiveAttribute.attributeId;
+                    receiveAttribute.vendorpec = localAttributeId >> 16;
+                    receiveAttribute.attributeId = localAttributeId & 0xffff;
+                    //cout << "Vendor: " << receiveAttribute.vendorpec << "\n";
+                    //cout << "Vendor attribute id: " << receiveAttribute.attributeId << "\n";
+                } else {
+                    receiveAttribute.vendorpec = VENDOR_NONE;
+                }
+                receiveAttribute.attributeStringName  = string(name);    
+                if (receiveAttribute.attributeType == PW_TYPE_INTEGER) {
+                    receiveAttribute.attributeIntValue = vp->lvalue;
+                }                          
+                receiveAttribute.attributeStringValue = string(value);                  
+                receiveAttributeList->push_back(receiveAttribute);                
             }
             vp = vp->next;
         }
@@ -132,10 +161,6 @@ AccessGatewayRadiusClient::sendAuthRequest(AgrcRequestType reqType,
         //fprintf(stderr, "\"%s\" RADIUS Authentication failure (RC=%i)\n", username, result);
         fprintf(stderr, "RADIUS Authentication failure (RC=%i)\n", result);
     }
-
-    receiveAttribute.attributeId          = 995;
-    receiveAttribute.attributeStringValue = "receiveAttribute_005";
-    receiveAttributeList->push_back(receiveAttribute);
 
     return (requestStatus);
 }

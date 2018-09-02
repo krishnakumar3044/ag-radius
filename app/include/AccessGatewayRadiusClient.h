@@ -71,8 +71,9 @@ class AccessGatewayRadiusClient
             AGRC_ACCT_REQUEST
         };
 
-        typedef struct {
+        typedef struct AgrcAttribute_ {
             int32_t              attributeId;
+            string               attributeStringName;
             rc_attr_type         attributeType;
             uint32_t             attributeIntValue;
             string               attributeStringValue;
