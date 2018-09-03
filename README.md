@@ -62,5 +62,8 @@ This library can be created in the following two different ways
      - `/usr/local/lib/libaccess-gateway-radius-client-lib.so`
      - `/usr/local/include/AccessGatewayRadiusClient.h`
    
-   - Run the sample program from `build` directory (app/agrcbin) - to ensure that everything is installed properly    
+4. Run the sample program from `build` directory (app/agrcbin) - to ensure that everything is installed properly   
+   sendAuthRequest and sendAcctRequest are the methods in the class to send 'Auth' request and 'Acct' request
+ 
+ 
 
