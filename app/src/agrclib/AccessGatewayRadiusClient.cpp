@@ -188,12 +188,12 @@ AccessGatewayRadiusClient::sendAcctRequest(AgrcRequestType reqType,
 
     for (it = (*sendAttributeList).begin(); it != (*sendAttributeList).end(); ++it)
     {
-        cout << "Attribute id: " << it->attributeId << "\n";      
-        cout << "Attribute type: " << it->attributeType << "\n";                     
-        cout << "Attribute int value: " << it->attributeIntValue << "\n";                
-        cout << "Attribute String value: " << it->attributeStringValue << "\n";        
-        cout << "Attribute vendorpec: " << it->vendorpec << "\n";  
-        cout << "\n";              
+        //cout << "Attribute id: " << it->attributeId << "\n";      
+        //cout << "Attribute type: " << it->attributeType << "\n";                     
+        //cout << "Attribute int value: " << it->attributeIntValue << "\n";                
+        //cout << "Attribute String value: " << it->attributeStringValue << "\n";        
+        //cout << "Attribute vendorpec: " << it->vendorpec << "\n";  
+        //cout << "\n";              
         /*
          * Fill in User-Name
          */
@@ -218,12 +218,16 @@ AccessGatewayRadiusClient::sendAcctRequest(AgrcRequestType reqType,
                 break;
 
             case PW_TYPE_IPADDR:
-
+            case PW_TYPE_DATE:
+                if (rc_avpair_add(rh, &sendAttributes, it->attributeId, 
+                                it->attributeStringValue.c_str(), -1, 0) == NULL) {
+                    requestStatus = AGRC_FAIL;
+                    return (requestStatus);  
+                }
                 break;
 
             default:
-                break;
-
+                break;            
         }
     }
 
@@ -234,7 +238,7 @@ AccessGatewayRadiusClient::sendAcctRequest(AgrcRequestType reqType,
     } else {
         //fprintf(stderr, "\"%s\" RADIUS Authentication failure (RC=%i)\n", username, result);
         fprintf(stderr, "RADIUS Accounting failure (RC=%i)\n", result);
-        cout << "RADIUS Accounting failure \n";
+        //cout << "RADIUS Accounting failure \n";
         requestStatus = AGRC_FAIL;
     }
 
