@@ -29,7 +29,7 @@ This library can be created in the following two different ways
      - `/etc/agrc/radiusclient.conf`
      - `/etc/agrc/dictionary`
      - `/etc/agrc/dictionary.nomadix`
-     - `/etc/agrc/dictionary.wba
+     - `/etc/agrc/dictionary.wba`
      - `/etc/agrc/servers`
      - `/usr/local/lib/libaccess-gateway-radius-client-lib.so`
      - `/usr/local/include/AccessGatewayRadiusClient.h`
@@ -57,7 +57,7 @@ This library can be created in the following two different ways
      - `/etc/agrc/radiusclient.conf`
      - `/etc/agrc/dictionary`
      - `/etc/agrc/dictionary.nomadix`
-     - `/etc/agrc/dictionary.wba
+     - `/etc/agrc/dictionary.wba`
      - `/etc/agrc/servers`
      - `/usr/local/lib/libaccess-gateway-radius-client-lib.so`
      - `/usr/local/include/AccessGatewayRadiusClient.h`
